@@ -5,8 +5,6 @@ var fn_wist = async(ctx, next) => {
   var string = ctx.params.wist;
   var google = require('wist/lib/google');
   var baidu = require('wist/lib/baidu');
-  const Koa = require('koa');
-  var app = new Koa();
 
   var
     googleCounter = 0,
