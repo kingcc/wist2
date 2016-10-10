@@ -25,8 +25,11 @@ var fn_wist = async(ctx, next) => {
 
   const search = () => {
     return new Promise((resolve, reject) => {
+      googleCounter = 0;
+      baiduCounter = 0;
+      googleResults = [];
+      baiduResults = [];
       baidu(string, function(err, res) {
-        if (!res) reject();
         if (err) throw err;
 
         for (var i = 0; i < res.links.length; ++i) {
@@ -38,7 +41,6 @@ var fn_wist = async(ctx, next) => {
           if (res.next) res.next();
         } else {
           google(string, function(err, res) {           
-            if (!res) resolve({ baidu: baiduResults });
             if (err) throw err;
 
             for (var i = 0; i < res.links.length; ++i) {
@@ -60,8 +62,8 @@ var fn_wist = async(ctx, next) => {
 
   try {
     ctx.response.type = 'application/json';
+    ctx.response.set("Access-Control-Allow-Origin", "*");
     ctx.response.body = await search();
-    await next();
   } catch (e) {
     ctx.response.status = 400;
     ctx.response.body = {
