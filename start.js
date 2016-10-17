@@ -1,5 +1,5 @@
 'use strict';
-var register = require('babel-cli/node_modules/babel-core/register');
+var register = require('babel-core/register');
 
 register({
     presets: ['stage-3']

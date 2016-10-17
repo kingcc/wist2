@@ -3,6 +3,8 @@
 var fn_wist = async(ctx, next) => {
 
   var string = ctx.params.wist;
+  var req = ctx.request;
+
   var google = require('wist/lib/google');
   var baidu = require('wist/lib/baidu');
 
@@ -61,6 +63,7 @@ var fn_wist = async(ctx, next) => {
   
 
   try {
+    console.log(` recive request: ${req.ip} -> ${req.method} ${req.protocol}:/\/${req.hostname}${req.path}`);
     ctx.response.type = 'application/json';
     ctx.response.set("Access-Control-Allow-Origin", "*");
     ctx.response.body = await search();
