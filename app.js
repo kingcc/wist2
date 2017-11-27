@@ -1,23 +1,24 @@
-'use strict';
+'use strict'
 
-const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const controller = require('./controller');
-//const https = require('https');
-//const fs = require('fs');
+const Koa = require('koa')
+const bodyParser = require('koa-body')
+const https = require('https')
+const fs = require('fs')
 
-const app = new Koa();
-const isProduction = process.env.NODE_ENV === 'production';
+const rest = require('./rest')
+const controller = require('./controller')
 
-app.use(bodyParser());
-app.use(controller());
+const app = new Koa()
+const isProduction = process.env.NODE_ENV === 'production'
 
-app.listen(3000);
+app.use(bodyParser({ multipart: true }))
+app.use(rest.restify())
+app.use(controller())
 
-// const options = {
-//   key: fs.readFileSync('ssl/key.pem'),
-//   cert: fs.readFileSync('ssl/cert.pem')
-// };
-// https.createServer(options, app.callback()).listen(3000);
+const options = {
+  key: fs.readFileSync('ssl/private.key'),
+  cert: fs.readFileSync('ssl/certificate.crt')
+}
 
-console.log('node started at port 3000...');
+https.createServer(options, app.callback()).listen(3000)
+console.log('wist-api started at port 3000...')

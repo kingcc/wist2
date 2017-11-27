@@ -1,6 +1,6 @@
 Koa@2
 ---
 
-This is a Virtual-Blog API project using Koa@2 for personal study.
+Koa@2 App templete.
 
--	GET /wist/:wist [ wist@^1.3.0 ]  * To offer search engine service .
+* Use this templete need to join your own function code.
