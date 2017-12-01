@@ -1,6 +1,7 @@
-Koa@2
+Wist@2
 ---
+![wist](./demo/wist.png)
 
-Koa@2 App templete.
+Wist@2 App templete.
 
 * Use this templete need to join your own function code.
